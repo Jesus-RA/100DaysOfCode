@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center text-center">
-        <div class="col-md-8">
+        <div class="col-md-4">
             <h1>Edit product {{$product->title}}</h1>
             <form action="{{route('products.update', $product)}}" method="POST">
                 @csrf
