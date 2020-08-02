@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-row mb-2">
                     {{-- <input type="text" name="description"  id="description" placeholder="Description" value="{{old('description')}}" class="form-control" required> --}}
-                    <textarea name="description" id="description" placeholder="Description" class="form-control" required>{{old('description')}}</textarea>
+                    <textarea name="description" id="description" placeholder="Description" rows="5" class="form-control" required>{{old('description')}}</textarea>
                 </div>
                 <div class="form-row mb-2">
                     <input type="number" name="price" id="price" placeholder="Price" value="{{old('price')}}" min="1.00" step="0.01" class="form-control" required>

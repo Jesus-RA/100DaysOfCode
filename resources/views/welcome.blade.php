@@ -12,7 +12,7 @@
         @else
             @foreach ($products as $product)
                 <div class="col-md-3 mb-3">
-                    @include('components.product-card')                    
+                    @include('components.product-card')                   
                 </div>
             @endforeach
         @endempty

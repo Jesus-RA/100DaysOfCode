@@ -12,7 +12,7 @@
                 </div>
                 <div class="form-row mb-2">
                     {{-- <input type="text" name="description"  id="description" value="{{ old('description') ?? $product->description}}" class="form-control" required> --}}
-                    <textarea name="description" id="description" placeholder="Description" class="form-control">{{old('description') ?? $product->description}}</textarea>
+                    <textarea name="description" id="description" placeholder="Description" rows="5" class="form-control">{{old('description') ?? $product->description}}</textarea>
                 </div>
                 <div class="form-row mb-2">
                     <input type="number" name="price" id="price" value="{{ old('price') ?? $product->price}}" min="1.00" step="0.01" class="form-control" required>
