@@ -170,13 +170,18 @@ sup {
 }
 
 a {
-  color: #3490dc;
+  /* color: #3490dc; */
+  color: white;
+  font-weight: bold;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #1d68a7;
+  /* color: #1d68a7; */
+  color: white;
+  font-weight: bold;
+  /* background-color: yellowgreen; */
   text-decoration: underline;
 }
 

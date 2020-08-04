@@ -19,14 +19,25 @@ class Product extends Model
     ];
 
     public function carts(){
-        return $this->belongsToMany(Cart::class)->withPivot('quantity');
+        // Relation many to many
+        // return $this->belongsToMany(Cart::class)->withPivot('quantity');
+        // Polymorphic relation many to many        
+        return $this->morphedByMany(Cart::class, 'productable')->withPivot('quantity');
     }
 
     public function orders(){
-        return $this->belongsToMany(Order::class)->withPivot('quantity');
+        // Relation many to many
+        // return $this->belongsToMany(Order::class)->withPivot('quantity');
+        // Polymorphic relation many to many
+        return $this->morphedByMany(Order::class, 'productable')->withPivot('quantity');
     }
 
     public function images(){
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    // Creating a local scope
+    public function scopeAvailable($query){
+        $query->where('status', 'available');
     }
 }

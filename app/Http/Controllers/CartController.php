@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use Illuminate\Http\Request;
+use App\Services\CartService;
 
 class CartController extends Controller
 {
+    // Using dependencies injection
+    public $cartService;
+
+    public function __construct(CartService $cartService){
+        $this->cartService = $cartService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cart = $this->cartService->getCartFromCookie();
+
+        return view('carts.index', compact('cart'));
     }
 
     /**

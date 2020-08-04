@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Illuminate\Http\Request;
+use App\Services\CartService;
 
 class OrderController extends Controller
 {
+
+    public $cartService;
+
+    public function __construct(CartService $cartService){
+        $this->cartService = $cartService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +32,13 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $cart = $this->cartService->getCartFromCookie();
+        if(!isset($cart) || $cart->products->isEmpty()){
+            return redirect()
+                ->back()
+                ->withErrors('Your cart is empty!');
+        }
+        return view('orders.create', compact('cart'));
     }
 
     /**

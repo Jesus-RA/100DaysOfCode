@@ -23,6 +23,9 @@ class Order extends Model
     }
 
     public function products(){
-        return $this->belongsToMany(Product::class)->withPivot('quantity');
+        // Relation many to many
+        // return $this->belongsToMany(Product::class)->withPivot('quantity');
+        // Polymorphic relation many to many
+        return $this->morphToMany(Product::class, 'productable')->withPivot('quantity');
     }
 }
