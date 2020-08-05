@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-md-12">                
             <h1>Order Details</h1>
+            <h4 class="text-center"> <strong>Grand Total: </strong>{{$cart->total}} </h4>
             <div class="table-resposive">
                 <table class="table table-striped">
                     <thead>
@@ -25,7 +26,7 @@
                                 <td>{{$product->price}}</td>
                                 <td>{{$product->pivot->quantity}}</td>
                                 <td>
-                                    <strong>{{$product->pivot->quantity * $product->price}}</strong>
+                                    <strong>$ {{$product->total}}</strong>
                                 </td>
                             </tr>
                         @endforeach

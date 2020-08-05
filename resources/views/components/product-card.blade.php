@@ -10,7 +10,9 @@
         </p>
         <p class="card-text"> <strong> {{$product->stock}} left</strong> </p>
         @if (isset($cart))        
-            Quantity: {{$product->pivot->quantity}}
+            <p class="card-text text-center">
+                {{$product->pivot->quantity}} in your cart <strong>($ {{$product->total}})</strong>
+            </p>
         @endif
         {{-- Comentario en Blade --}}
         {{-- {!!Escapar código HTML !!} --}}

@@ -28,4 +28,9 @@ class Order extends Model
         // Polymorphic relation many to many
         return $this->morphToMany(Product::class, 'productable')->withPivot('quantity');
     }
+
+    // Computed Attributes - Accessors 
+    public function getTotalAttribute(){
+        return $this->products->pluck('total')->sum();
+    }
 }

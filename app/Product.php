@@ -40,4 +40,9 @@ class Product extends Model
     public function scopeAvailable($query){
         $query->where('status', 'available');
     }
+
+    // Computed Attributes - Accessors 
+    public function getTotalAttribute(){
+        return $this->pivot->quantity * $this->price;
+    }
 }
