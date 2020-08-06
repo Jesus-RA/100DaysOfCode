@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Panel;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Product;
@@ -10,9 +11,12 @@ use App\Http\Requests\ProductRequest;
 class ProductController extends Controller
 {
 
-    public function __construct(){
-        $this->middleware('auth');
-    }
+    // public function __construct(){
+    //     $this->middleware('auth');
+            // Ya no es necesario utilizar el middleware aquí ya que al momento de estár en panel.php(Route)
+            // ya se tendrá la validación para usuarios registrados gracias al map route creado en 
+            // RouteServiceProvider.php
+    // }
 
     public function index(){
         // $products = DB::table('products')->get(); //Query Builder

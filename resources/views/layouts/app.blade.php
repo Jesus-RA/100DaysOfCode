@@ -39,11 +39,13 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="{{route('products.index')}}" class="nav-link">
-                                Products
-                            </a>
-                        </li>
+                        @if (optional(auth()->user())->isAdmin())
+                            <li class="nav-item">
+                                <a href="{{route('panel')}}" class="nav-link">
+                                    Panel
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             @inject('cartService', 'App\Services\CartService')
                             <a href="{{route('carts.index')}}" class="nav-link">
@@ -95,6 +97,11 @@
                                 </li>
                             @endforeach
                         </ul>
+                    </div>
+                @endif
+                @if (session()->has('success'))
+                    <div class="alert alert-success text-center">
+                        {{session()->get('success')}}
                     </div>
                 @endif
                 @yield('content')

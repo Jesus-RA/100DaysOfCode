@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'MainController@index');
+Route::get('/', 'MainController@index')->name('main');
 
 // Route resource nos crea todas las rutas para gestionar los recursos
 // index, create, store, show, edit, update and destroy
 // sólo debemos indicar el nombre de la tabla y el controlador
-Route::resource('products', 'ProductController');
+// Route::resource('products', 'ProductController'); La movemos de aquí y la llevamos a la carpeta panel, para mantener la protección a usuarios administradores.
 // también podemos aplicar only y except para las rutas
 
 // Route::get('/products', 'ProductController@index')->name('products.index');
@@ -43,6 +43,8 @@ Route::resource('products.carts', 'ProductCartController')->only(['store', 'dest
 Route::resource('carts', 'CartController')->only(['index']);
 
 Route::resource('orders', 'OrderController')->only(['create', 'store']);
+
+Route::resource('orders.payments', 'OrderPaymentController')->only(['create', 'store']);
 
 Auth::routes();
 

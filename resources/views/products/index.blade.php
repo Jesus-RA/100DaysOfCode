@@ -17,11 +17,11 @@
                 Éstos elementos ya no son necesarios ya que en todos los metodos se está creando 
                 la session success con su respectivo mensaje.
             --}}
-            @if (session()->has('success'))
+            {{-- @if (session()->has('success'))
                 <div class="alert alert-success text-center">
                     {{session()->get('success')}}
                 </div>
-            @endif
+            @endif --}}
 
             @empty ($products){{-- @if (empty($products)) --}}
                 <div class="alert alert-warning text-center">
