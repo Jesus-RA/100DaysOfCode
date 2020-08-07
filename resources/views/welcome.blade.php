@@ -10,11 +10,15 @@
         </div>
     @else
         <div class="row">
+            {{-- @dump($products) --}}
             @foreach ($products as $product)
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 mb-3">
                         @include('components.product-card')                   
                     </div>
             @endforeach
+            {{-- @dump($products) --}}
+            {{-- {{dd(\DB::getQueryLog())}} --}}
+            {{-- De ésta forma podemos ver el log de consultas a la base de datos --}}
         </div>
     @endempty
 @endsection

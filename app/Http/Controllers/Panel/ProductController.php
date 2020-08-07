@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Panel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Product;
+use App\PanelProduct;
 use App\Http\Requests\ProductRequest;
+use App\Scopes\AvailableScope;
 
 class ProductController extends Controller
 {
@@ -20,7 +21,14 @@ class ProductController extends Controller
 
     public function index(){
         // $products = DB::table('products')->get(); //Query Builder
-        $products = Product::all();// Con el modelo a través de Eloquent
+        // $products = Product::all();// Con el modelo a través de Eloquent
+        // Without using the global scope
+        // $products = Product::withoutGlobalScope(AvailableScope::class)->get();
+        // Now with the new PanelProduct model is not necessary use the withoutGlobalScope
+        // because in the model we have removed the Global Scope
+        // $products = PanelProduct::all();
+        // Now after added the $with variable we have to especify that we don't want the images here
+        $products = PanelProduct::without('images')->get();
         return view('products.index', compact('products'));
     }
 
@@ -43,7 +51,7 @@ class ProductController extends Controller
         // Ahora para validar las entradas utilizaremos un request en el cual indicaremos los datos
         // a validar, también crearemos en el request la validación para el caso de stock vacío y
         // producto disponible
-        $product = Product::create($request->validated());  
+        $product = PanelProduct::create($request->validated());  
 
         // Validar el producto creado
         // if(request()->status == 'available' && request()->stock == 0){
@@ -103,7 +111,7 @@ class ProductController extends Controller
         // de ésta la parte derecha de with (withNombreSession) será el nombre de la session que se creará
     }
 
-    public function show(Product $product){//Inyección implícita de modelos
+    public function show(PanelProduct $product){//Inyección implícita de modelos
         // La inyección implícita de modelos, hace que laravel implícitamente realice
         // la búsqueda del producto y nos lo devuelva en la variable $product
 
@@ -115,12 +123,12 @@ class ProductController extends Controller
         return view('products.show', compact('product'));
     }
 
-    public function edit(Product $product){
+    public function edit(PanelProduct $product){
         // $product = Product::findOrFail($product);
         return view('products.edit', compact('product'));
     }
 
-    public function update(ProductRequest $request, Product $product){
+    public function update(ProductRequest $request, PanelProduct $product){
 
         // $rules = [
         //     'title' => ['required', 'max:255'],
@@ -151,7 +159,7 @@ class ProductController extends Controller
             // ->with('updated', 'The product was updated successfuly!');
     }
 
-    public function destroy(Product $product){
+    public function destroy(PanelProduct $product){
         // $product = Product::findOrFail($product);
         $product->delete();
         return redirect()

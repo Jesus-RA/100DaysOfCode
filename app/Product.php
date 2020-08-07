@@ -3,12 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\AvailableScope;
 use App\Cart;
 use App\Order;
 use App\Image;
 
 class Product extends Model
 {
+
+    protected $table = 'products';
+
+    // In $with we especify what relations we want when we do an all() query
+    protected $with = [
+        'images',
+    ];
+
     // Indica los atributos que son asignados de forma masiva.
     protected $fillable = [
         'title',
@@ -17,6 +26,16 @@ class Product extends Model
         'stock',
         'status',
     ];
+
+    /**
+     * The "booted" method of the model.
+     *  Call here the global scope
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new AvailableScope);
+    }
 
     public function carts(){
         // Relation many to many
