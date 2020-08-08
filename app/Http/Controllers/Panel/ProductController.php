@@ -119,7 +119,6 @@ class ProductController extends Controller
         // $product = DB::table('products')->find($product);// Query Builder
 
         // $product = Product::findOrFail($product);// Eloquent
-
         return view('products.show', compact('product'));
     }
 

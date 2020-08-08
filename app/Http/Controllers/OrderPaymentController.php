@@ -6,6 +6,7 @@ use App\Order;
 use App\Payment;
 use Illuminate\Http\Request;
 use App\Services\CartService;
+use Illuminate\Support\Facades\DB;
 
 class OrderPaymentController extends Controller
 {
@@ -37,18 +38,23 @@ class OrderPaymentController extends Controller
      */
     public function store(Request $request, Order $order)
     {
-        $this->cartService->getCartFromCookie()->products()->detach();
+        // Using database transactions
+        return DB::transaction(function() use($order){
 
-        $order->payment()->create([
-            'amount' => $order->total,
-            'payed_at' => now(),
-        ]);
+            $this->cartService->getCartFromCookie()->products()->detach();
+    
+            $order->payment()->create([
+                'amount' => $order->total,
+                'payed_at' => now(),
+            ]);
+    
+            $order->status = 'payed';
+            $order->save();
+    
+            return redirect()
+                ->route('main')
+                ->withSuccess("Thanks! Your payment for \$ {$order->total} was successful.");
 
-        $order->status = 'payed';
-        $order->save();
-
-        return redirect()
-            ->route('main')
-            ->withSuccess("Thanks! Your payment for \$ {$order->total} was successful.");
+        }, 5);
     }
 }
