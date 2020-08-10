@@ -52,3 +52,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('images', 'UploadImageController');
+
+Route::resource('contacts', 'ContactController')->only(['create', 'store']);
+
+Route::get('/mail', function(){
+    return view('emails.email');
+});
