@@ -28,7 +28,8 @@ class ProductController extends Controller
         // because in the model we have removed the Global Scope
         // $products = PanelProduct::all();
         // Now after added the $with variable we have to especify that we don't want the images here
-        $products = PanelProduct::without('images')->get();
+        // $products = PanelProduct::without('images')->get();
+        $products = PanelProduct::all();
         return view('products.index', compact('products'));
     }
 

@@ -47,6 +47,7 @@
                         <tbody>
                             @foreach ($products as $product)
                                 <tr>
+                                    @include('components.modal-product')
                                     <td>{{$product->id}}</td>
                                     <td>{{$product->title}}</td>
                                     <td>{{$product->description}}</td>
@@ -54,7 +55,10 @@
                                     <td>{{$product->stock}}</td>
                                     <td>{{$product->status}}</td>
                                     <td>
-                                        <a href="{{route('products.show', $product->id)}}" class="btn btn-info">Show</a>
+                                        {{-- <a href="{{route('products.show', $product->id)}}" class="btn btn-info">Show</a> --}}
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal{{$product->id}}">
+                                            Show
+                                        </button>
                                         <a href="{{route('products.edit', $product)}}" class="btn btn-warning">Edit</a>
                                         <form action="{{route('products.destroy', $product)}}" method="POST" class="d-inline">
                                             @csrf
