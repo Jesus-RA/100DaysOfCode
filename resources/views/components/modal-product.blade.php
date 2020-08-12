@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             {{-- Carousel --}}
-            @dump($product)
+            {{-- @dump($product) --}}
             <div id="carousel{{$product->id}}" class="carousel slide carousel-fade">
                 <div class="carousel-inner">
                     @foreach ($product->images as $image)

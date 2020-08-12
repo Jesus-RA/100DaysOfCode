@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Panel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\PanelProduct;
 use App\Http\Requests\ProductRequest;
 use App\Scopes\AvailableScope;
+use App\PanelProduct;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -29,7 +30,8 @@ class ProductController extends Controller
         // $products = PanelProduct::all();
         // Now after added the $with variable we have to especify that we don't want the images here
         // $products = PanelProduct::without('images')->get();
-        $products = PanelProduct::all();
+        // $products = Product::all();
+        $products = Product::all();
         return view('products.index', compact('products'));
     }
 
